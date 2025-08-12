@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung Galaxy Ultimate Pro | Official</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0a4da3;
+            --samsung-blue: #1428a0;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --light-text: #f5f5f5;
+            --accent-white: #e0e0e0;
+            --highlight: #3a7bd5;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--darker-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .samsung-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--samsung-blue);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        /* Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+            background-color: rgba(10, 10, 10, 0.9) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            color: var(--accent-white) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--samsung-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, var(--darker-bg), rgba(0, 0, 0, 0.7));
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .typed-cursor {
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+
+        .btn-cta {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary-cta {
+            background-color: var(--samsung-blue);
+            border-color: var(--samsung-blue);
+        }
+
+        .btn-outline-cta {
+            color: var(--light-text);
+            border-color: var(--light-text);
+        }
+
+        .btn-primary-cta:hover {
+            background-color: transparent;
+            border-color: var(--light-text);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline-cta:hover {
+            background-color: var(--light-text);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Features Section */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(to right, var(--samsung-blue), transparent);
+        }
+
+        .feature-card {
+            background-color: rgba(20, 40, 160, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background-color: rgba(20, 40, 160, 0.2);
+            border-color: rgba(20, 40, 160, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--samsung-blue);
+            margin-bottom: 20px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background-color: var(--darker-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-display {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .phone-img {
+            max-width: 100%;
+            transition: transform 0.5s ease;
+            cursor: zoom-in;
+        }
+
+        .phone-img.zoomed {
+            transform: scale(1.5);
+            cursor: zoom-out;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--light-text);
+            transform: scale(1.1);
+        }
+
+        /* Specs Section */
+        .specs-tabs .nav-link {
+            background-color: transparent;
+            color: var(--light-text);
+            border: none;
+            padding: 12px 20px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .specs-tabs .nav-link.active {
+            color: var(--samsung-blue);
+            background-color: transparent;
+        }
+
+        .specs-tabs .nav-link.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background-color: var(--samsung-blue);
+        }
+
+        .spec-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-name {
+            font-weight: 600;
+            color: var(--accent-white);
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--samsung-blue);
+        }
+
+        .stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        /* Comparison Section */
+        .comparison-table {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background-color: var(--samsung-blue);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .better {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .worse {
+            color: #F44336;
+            font-weight: bold;
+        }
+
+        /* FAQ Section */
+        .accordion-button {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(20, 40, 160, 0.2);
+            color: var(--light-text);
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(20, 40, 160, 0.5);
+        }
+
+        .accordion-body {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Contact Section */
+        .contact-form .form-control {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            padding: 12px 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--samsung-blue);
+            box-shadow: 0 0 0 0.25rem rgba(20, 40, 160, 0.25);
+            color: var(--light-text);
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--darker-bg);
+            padding: 60px 0 20px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--samsung-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h5 {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-links h5:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            background-color: var(--samsung-blue);
+        }
+
+        .footer-links a {
+            color: var(--accent-white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--samsung-blue);
+            padding-left: 5px;
+        }
+
+        .newsletter-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            padding: 10px 15px;
+            border-radius: 30px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .newsletter-btn {
+            background-color: var(--samsung-blue);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--samsung-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn-cta {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .typed-cursor {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung Logo" class="samsung-logo">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#specs">Specs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#compare">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <a href="#buy" class="btn btn-primary-cta btn-cta ms-lg-3">Buy Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-modern-smartphone-screen-15809-large.mp4" type="video/mp4">
+        </video>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="hero-title">Galaxy Ultimate Pro</h1>
+                    <h2 class="hero-subtitle">The future is now with <span class="typed-text"></span><span class="typed-cursor">|</span></h2>
+                    <p>Experience the pinnacle of smartphone technology with our most advanced camera system, revolutionary battery life, and stunning 120Hz AMOLED display.</p>
+                    <a href="#buy" class="btn btn-primary-cta btn-cta">Pre-order Now</a>
+                    <a href="#features" class="btn btn-outline-cta btn-cta">Explore Features</a>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left">
+                    <img src="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv.jpg" alt="Galaxy Ultimate Pro" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5" id="features">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Unmatched Features</h2>
+                <p class="lead">Discover what makes the Galaxy Ultimate Pro stand out from the crowd</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>200MP Camera</h3>
+                        <p>Professional-grade photography with our advanced 200MP sensor, 8K video recording, and nightography capabilities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Super Fast Charging</h3>
+                        <p>65W wired and 30W wireless charging gets you from 0 to 100% in just 45 minutes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>Snapdragon 8 Gen 3</h3>
+                        <p>The most powerful mobile processor with 30% better performance and 40% improved efficiency.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-screen"></i>
+                        </div>
+                        <h3>Dynamic AMOLED 2X</h3>
+                        <p>6.8" 120Hz adaptive refresh rate display with 2000 nits peak brightness and HDR10+.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-5 gallery-section" id="gallery">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Explore the Design</h2>
+                <p class="lead">Premium materials meet elegant design</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="phone-display text-center">
+                        <img src="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv.jpg" alt="Galaxy Ultimate Pro" class="img-fluid phone-img" id="phone-img">
+                    </div>
+                    <div class="text-center mt-4">
+                        <h5>Available Colors</h5>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="color-option active" style="background-color: #000;" data-img="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv.jpg" data-color="Phantom Black"></div>
+                            <div class="color-option" style="background-color: #5F84C4;" data-img="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv-blue.jpg" data-color="Sky Blue"></div>
+                            <div class="color-option" style="background-color: #E8DCCC;" data-img="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv-beige.jpg" data-color="Cream"></div>
+                            <div class="color-option" style="background-color: #6A5A45;" data-img="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv-green.jpg" data-color="Forest Green"></div>
+                        </div>
+                        <p class="mt-2" id="color-name">Phantom Black</p>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h3>Designed for Perfection</h3>
+                    <p class="lead">The Galaxy Ultimate Pro features a refined design with an aluminum frame and Gorilla Glass Victus 2 on both front and back.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> IP68 water and dust resistance</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> 6.8" edge-to-edge display with minimal bezels</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Premium matte finish that resists fingerprints</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Symmetrical design for balanced feel</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> 30% stronger frame than previous generation</li>
+                    </ul>
+                    <a href="#specs" class="btn btn-primary-cta btn-cta mt-3">See Full Specifications</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section class="py-5" id="specs">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Technical Specifications</h2>
+                <p class="lead">Everything you need to know about the Galaxy Ultimate Pro</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs specs-tabs mb-4 justify-content-center" id="specsTab" role="tablist" data-aos="fade-up">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="display-tab" data-bs-toggle="tab" data-bs-target="#display" type="button" role="tab" aria-controls="display" aria-selected="true">Display</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="camera-tab" data-bs-toggle="tab" data-bs-target="#camera" type="button" role="tab" aria-controls="camera" aria-selected="false">Camera</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="performance-tab" data-bs-toggle="tab" data-bs-target="#performance" type="button" role="tab" aria-controls="performance" aria-selected="false">Performance</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="battery-tab" data-bs-toggle="tab" data-bs-target="#battery" type="button" role="tab" aria-controls="battery" aria-selected="false">Battery</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="design-tab" data-bs-toggle="tab" data-bs-target="#design" type="button" role="tab" aria-controls="design" aria-selected="false">Design</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="specsTabContent" data-aos="fade-up" data-aos-delay="100">
+                        <div class="tab-pane fade show active" id="display" role="tabpanel" aria-labelledby="display-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Display Type</span>
+                                        <span class="spec-value">Dynamic AMOLED 2X</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Size</span>
+                                        <span class="spec-value">6.8 inches</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Resolution</span>
+                                        <span class="spec-value">3088 x 1440 pixels (QHD+)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Refresh Rate</span>
+                                        <span class="spec-value">1-120Hz adaptive</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Brightness</span>
+                                        <span class="spec-value">2000 nits peak</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Protection</span>
+                                        <span class="spec-value">Gorilla Glass Victus 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="camera" role="tabpanel" aria-labelledby="camera-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Main Camera</span>
+                                        <span class="spec-value">200MP, f/1.7, OIS</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Ultra Wide</span>
+                                        <span class="spec-value">12MP, f/2.2, 120° FOV</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Telephoto 1</span>
+                                        <span class="spec-value">10MP, f/2.4, 3x optical zoom</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Telephoto 2</span>
+                                        <span class="spec-value">10MP, f/4.9, 10x optical zoom</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Front Camera</span>
+                                        <span class="spec-value">40MP, f/2.2</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Video</span>
+                                        <span class="spec-value">8K @ 30fps, 4K @ 120fps</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="performance" role="tabpanel" aria-labelledby="performance-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Processor</span>
+                                        <span class="spec-value">Qualcomm Snapdragon 8 Gen 3</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">GPU</span>
+                                        <span class="spec-value">Adreno 750</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM</span>
+                                        <span class="spec-value">12GB LPDDR5X</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Storage</span>
+                                        <span class="spec-value">256GB/512GB/1TB UFS 4.0</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">OS</span>
+                                        <span class="spec-value">Android 14 with One UI 6</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Cooling</span>
+                                        <span class="spec-value">Vapor chamber cooling system</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="battery" role="tabpanel" aria-labelledby="battery-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Capacity</span>
+                                        <span class="spec-value">5000mAh</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Wired Charging</span>
+                                        <span class="spec-value">65W (50% in 15 mins)</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Wireless Charging</span>
+                                        <span class="spec-value">30W</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Reverse Wireless</span>
+                                        <span class="spec-value">15W</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Battery Life</span>
+                                        <span class="spec-value">Up to 2 days with normal use</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Power Saving</span>
+                                        <span class="spec-value">Extreme power saving mode</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Dimensions</span>
+                                        <span class="spec-value">163.4 x 78.1 x 8.9 mm</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Weight</span>
+                                        <span class="spec-value">234g</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">Build</span>
+                                        <span class="spec-value">Armor Aluminum frame, Gorilla Glass Victus 2</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="spec-item">
+                                        <span class="spec-name">Colors</span>
+                                        <span class="spec-value">Phantom Black, Sky Blue, Cream, Forest Green</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">IP Rating</span>
+                                        <span class="spec-value">IP68 water and dust resistant</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">S Pen</span>
+                                        <span class="spec-value">Integrated with 2.8ms latency</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-dark" id="testimonials">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="lead">Real experiences from Galaxy Ultimate Pro users</p>
+            </div>
+            
+            <div class="row" data-aos="fade-up">
+                <div class="col-12">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-3">"The camera system is absolutely mind-blowing. The 200MP sensor captures details I've never seen before in a smartphone."</p>
+                                            <h5>Sarah Johnson</h5>
+                                            <small>Photographer</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <p class="mb-3">"Battery life is incredible. I'm getting through two full days with heavy use. The 65W charging is a game changer."</p>
+                                            <h5>Michael Chen</h5>
+                                            <small>Business Executive</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-3">"The display is the best I've ever seen. 120Hz makes everything so smooth, and the colors are perfect."</p>
+                                            <h5>Emily Rodriguez</h5>
+                                            <small>Graphic Designer</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-3">"Performance is unmatched. Games run at max settings without any lag or overheating issues."</p>
+                                            <h5>David Wilson</h5>
+                                            <small>Mobile Gamer</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <p class="mb-3">"The build quality is premium and it feels great in hand. Only wish it was a bit lighter."</p>
+                                            <h5>Jessica Lee</h5>
+                                            <small>Tech Enthusiast</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="testimonial-card text-center">
+                                            <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="User" class="user-img mb-3">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <p class="mb-3">"The S Pen integration is perfect. As someone who takes lots of notes, this is the ultimate productivity device."</p>
+                                            <h5>Robert Taylor</h5>
+                                            <small>Professor</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-5" id="compare">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">How We Compare</h2>
+                <p class="lead">See how the Galaxy Ultimate Pro stacks up against the competition</p>
+            </div>
+            
+            <div class="row" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="table-responsive comparison-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Galaxy Ultimate Pro</th>
+                                    <th>iPhone 15 Pro Max</th>
+                                    <th>Pixel 8 Pro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Display</td>
+                                    <td>6.8" Dynamic AMOLED 2X 120Hz</td>
+                                    <td>6.7" Super Retina XDR 120Hz</td>
+                                    <td>6.7" LTPO OLED 120Hz</td>
+                                </tr>
+                                <tr>
+                                    <td>Processor</td>
+                                    <td class="better">Snapdragon 8 Gen 3</td>
+                                    <td>A17 Pro</td>
+                                    <td>Tensor G3</td>
+                                </tr>
+                                <tr>
+                                    <td>Main Camera</td>
+                                    <td class="better">200MP</td>
+                                    <td>48MP</td>
+                                    <td>50MP</td>
+                                </tr>
+                                <tr>
+                                    <td>Zoom</td>
+                                    <td class="better">10x optical, 100x space zoom</td>
+                                    <td>5x optical</td>
+                                    <td>5x optical</td>
+                                </tr>
+                                <tr>
+                                    <td>Battery</td>
+                                    <td class="better">5000mAh</td>
+                                    <td>4422mAh</td>
+                                    <td>5050mAh</td>
+                                </tr>
+                                <tr>
+                                    <td>Charging</td>
+                                    <td class="better">65W wired, 30W wireless</td>
+                                    <td>27W wired, 15W wireless</td>
+                                    <td>30W wired, 23W wireless</td>
+                                </tr>
+                                <tr>
+                                    <td>RAM</td>
+                                    <td class="better">12GB</td>
+                                    <td>8GB</td>
+                                    <td>12GB</td>
+                                </tr>
+                                <tr>
+                                    <td>Storage</td>
+                                    <td>Up to 1TB</td>
+                                    <td>Up to 1TB</td>
+                                    <td>Up to 1TB</td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    <td>$1,199</td>
+                                    <td class="worse">$1,399</td>
+                                    <td>$999</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 bg-dark" id="faq">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="lead">Find answers to common questions about the Galaxy Ultimate Pro</p>
+            </div>
+            
+            <div class="row justify-content-center" data-aos="fade-up">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item mb-3 border-0">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    Does the Galaxy Ultimate Pro support 5G?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, the Galaxy Ultimate Pro supports all major 5G bands including mmWave and sub-6GHz for ultra-fast connectivity wherever 5G is available.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item mb-3 border-0">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Is the S Pen included with the phone?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, the Galaxy Ultimate Pro comes with an improved S Pen that features 2.8ms latency for the most natural writing experience yet. It's stored inside the phone and charges automatically when inserted.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item mb-3 border-0">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    How many Android updates will the phone receive?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Samsung guarantees 5 years of major Android updates and 6 years of security updates for the Galaxy Ultimate Pro, ensuring your device stays current and secure for years to come.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item mb-3 border-0">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Does the phone have expandable storage?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The Galaxy Ultimate Pro does not have a microSD card slot. However, it comes with ample internal storage options (256GB, 512GB, or 1TB) using the ultra-fast UFS 4.0 standard.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item mb-3 border-0">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Is the display protected against scratches?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, the Galaxy Ultimate Pro features Corning Gorilla Glass Victus 2 on both the front and back, which offers improved scratch resistance and durability compared to previous generations.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy Now Section -->
+    <section class="py-5" id="buy">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Ready to Experience the Future?</h2>
+                    <p class="lead mb-4">Pre-order your Galaxy Ultimate Pro today and get free Galaxy Buds2 Pro ($229 value) and 1 year of Samsung Care+ ($99 value).</p>
+                    <div class="d-flex align-items-center mb-4">
+                        <h3 class="me-3">$1,199</h3>
+                        <span class="text-muted"><del>$1,399</del></span>
+                        <span class="badge bg-success ms-2">Save $200</span>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Choose your storage:</h5>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="storage" id="storage256" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="storage256">256GB</label>
+                            
+                            <input type="radio" class="btn-check" name="storage" id="storage512" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="storage512">512GB (+$100)</label>
+                            
+                            <input type="radio" class="btn-check" name="storage" id="storage1tb" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="storage1tb">1TB (+$300)</label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h5>Choose your color:</h5>
+                        <div class="d-flex">
+                            <div class="color-option active" style="background-color: #000;" data-color="Phantom Black"></div>
+                            <div class="color-option" style="background-color: #5F84C4;" data-color="Sky Blue"></div>
+                            <div class="color-option" style="background-color: #E8DCCC;" data-color="Cream"></div>
+                            <div class="color-option" style="background-color: #6A5A45;" data-color="Forest Green"></div>
+                        </div>
+                        <p class="mt-2" id="selected-color">Phantom Black</p>
+                    </div>
+                    <button class="btn btn-primary-cta btn-cta btn-lg">Pre-order Now</button>
+                    <p class="mt-3 small text-muted">*Free gifts with purchase while supplies last. Limited time offer.</p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://images.samsung.com/is/image/samsung/assets/global/smartphones/galaxy-s23-ultra/images/galaxy-s23-ultra-highlights-kv.jpg" alt="Galaxy Ultimate Pro" class="img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5" id="contact">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="lead">Have questions? Get in touch with our team</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="First Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            <input type="tel" class="form-control" placeholder="Phone Number">
+                            <select class="form-control">
+                                <option selected disabled>Select Inquiry Type</option>
+                                <option>Pre-order Questions</option>
+                                <option>Technical Support</option>
+                                <option>Product Information</option>
+                                <option>Other</option>
+                            </select>
+                            <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn btn-primary-cta btn-cta">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215256751343!2d-73.9888759240338!3d40.75798597138972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1689876154813!5m2!1sen!2sus" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Samsung Experience Store - Times Square</h5>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 20 Times Square, New York, NY 10036</p>
+                        <p><i class="fas fa-phone me-2"></i> (212) 555-0199</p>
+                        <p><i class="fas fa-envelope me-2"></i> timesquare@samsung.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Mon-Sat: 10AM - 9PM, Sun: 11AM - 7PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4 mb-lg-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" alt="Samsung" height="30" class="mb-3">
+                    <p>Innovating since 1969. Samsung continues to push the boundaries of what's possible with mobile technology.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <a href="#home">Home</a>
+                        <a href="#features">Features</a>
+                        <a href="#specs">Specifications</a>
+                        <a href="#compare">Comparison</a>
+                        <a href="#testimonials">Reviews</a>
+                        <a href="#faq">FAQ</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Support</h5>
+                        <a href="#">Contact Us</a>
+                        <a href="#">Warranty</a>
+                        <a href="#">Returns</a>
+                        <a href="#">Shipping</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="footer-links">
+                        <h5>Newsletter</h5>
+                        <p>Subscribe to get updates on new products and special offers.</p>
+                        <input type="email" class="newsletter-input" placeholder="Your Email">
+                        <button class="newsletter-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-5 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2023 Samsung Electronics. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Galaxy Ultimate Pro | SM-S999UZAAXAA</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Main JS -->
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Typed.js Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            var typed = new Typed('.typed-text', {
+                strings: ["200MP camera", "10x optical zoom", "120Hz display", "all-day battery"],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true
+            });
+        });
+
+        // AOS Initialization
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Color Selection for Phone
+        const colorOptions = document.querySelectorAll('.color-option');
+        const phoneImg = document.getElementById('phone-img');
+        const colorName = document.getElementById('color-name');
+        const selectedColor = document.getElementById('selected-color');
+
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // Add active class to clicked option
+                this.classList.add('active');
+                
+                // Change phone image
+                const newImg = this.getAttribute('data-img');
+                const newColor = this.getAttribute('data-color');
+                
+                if (newImg) {
+                    phoneImg.src = newImg;
+                    colorName.textContent = newColor;
+                    if (selectedColor) {
+                        selectedColor.textContent = newColor;
+                    }
+                }
+            });
+        });
+
+        // Phone Image Zoom Effect
+        phoneImg.addEventListener('click', function() {
+            this.classList.toggle('zoomed');
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', function() {
+            if (htmlElement.getAttribute('data-bs-theme') === 'dark') {
+                htmlElement.setAttribute('data-bs-theme', 'light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                htmlElement.setAttribute('data-bs-theme', 'dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Highlight active navigation item based on scroll position
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+        }
+    </script>
+</body>
+</html>
